@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-1: #569AFF66;
+  --color-2: #569AFF;
+  --color-3: #88DFAB66;
+  --color-4: #88DFAB;
+  --color-5: #00bcd466;
+  --color-6: #03a9f466;
+  --color-7: #fff59a66;
+  --color-8: #ff6d6d66;
+  --color-9: #cddc3966;
+  --color-10: #8bc34a66;
+  --color-11: #3f51b566;
+  --color-12: #2196f366;
+  --color-13: #8bc34a66;
+  --color-14: #00968866;
+  --gradient-angle: 150deg;
+  --gradient-start: 10%;
+  --gradient-end: 90%;
+  --color-start: #00bcd466;
+  --color-end: #ff6d6d66;
+  --dynamicGradient: linear-gradient(var(--gradient-angle), var(--color-start) var(--gradient-start), var(--color-end) var(--gradient-end));
+}
+
+html,
+body,
+#root {
+  font-family: 'Inter', sans-serif;
+  height: 100%;
+  font-weight: thin;
+  display: grid;
+  place-items: center;
+  @apply bg-sky-50;
+}
+
+@layer components {
+  .page {
+    background: var(--dynamicGradient);
+    animation: gradient 1s ease infinite;
+    height: min(90vh, 800px);
+    width: min(85vw, 400px);
+    @apply grid items-center rounded-2xl border border-gray-50 overflow-hidden select-none touch-none shadow-md;
+  }
+
+  .apps {
+    cursor: pointer;
+  }
+
+  .app {
+    transition: all 0.25s ease;
+
+    &:hover {
+      @apply bg-opacity-50
+    }
+  }
+
+  .app.dragging {
+    opacity: 0.0;
+    transform: scale(0.2);
+  }
+
+  .number-calc {
+    @apply text-white hover:text-gray-400 text-2xl grid hover:bg-opacity-70 transition-all cursor-pointer select-none items-center justify-center bg-gray-50 aspect-square rounded-full font-inter font-thin bg-opacity-0 border-slate-50 border-[0.1px];
+    width: 2.6em;
+
+    &.highlighted {
+      @apply bg-opacity-70 text-gray-400;
+    }
+  }
+
+  .number-pwds {
+    @apply text-white text-2xl w-20 h-20 grid hover:bg-opacity-70 hover:text-gray-400 transition-all cursor-pointer select-none items-center justify-center bg-gray-50 bg-opacity-0 aspect-square rounded-full font-inter font-thin border-slate-50 border-[0.1px];
+
+    &:last-of-type {
+      @apply col-start-2;
+    }
+  }
+
+  .gallery {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .gallery-image {
+      --galary-image-top: -1000px;
+      --gallery-image-left: 0px;
+      width: 50%;
+      height: 50%;
+      position: absolute;
+      top: var(--gallery-image-top);
+      left: var(--gallery-image-left);
+      transition: all 0.25s ease-in-out;
+    }
+  }
+
+  .month {
+    font-variant: tabular-nums;
+    width: 200px;
+    transform: scale(0);
+    animation-delay: 0s;
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+
+    &.in {
+      animation-name: slideIn;
+    }
+
+    &.out {
+      animation-name: slideOut;
+    }
+  }
+
+  .grid-item {
+    transform: scale(0);
+    animation-delay: var(--delay);
+    animation-duration: 0.2s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+
+    &.in {
+      animation-name: scaleIn;
+    }
+
+    &.out {
+      animation-name: scaleOut;
+    }
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+  }
+
+  60% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  0% {
+    transform: scale(1);
+  }
+
+  40% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: scale(0);
+  }
+
+  40% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
